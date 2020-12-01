@@ -151,6 +151,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// KCI
+SEXP KCI(SEXP pin_x, SEXP pin_y, SEXP pn, SEXP psymmetric, SEXP pkern1, SEXP pkern2);
+RcppExport SEXP _wCI_KCI(SEXP pin_xSEXP, SEXP pin_ySEXP, SEXP pnSEXP, SEXP psymmetricSEXP, SEXP pkern1SEXP, SEXP pkern2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type pin_x(pin_xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pin_y(pin_ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pn(pnSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type psymmetric(psymmetricSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pkern1(pkern1SEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pkern2(pkern2SEXP);
+    rcpp_result_gen = Rcpp::wrap(KCI(pin_x, pin_y, pn, psymmetric, pkern1, pkern2));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_wCI_usable", (DL_FUNC) &_wCI_usable, 3},
@@ -162,6 +178,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_wCI_rCIPermC", (DL_FUNC) &_wCI_rCIPermC, 10},
     {"_wCI_rCIBootC", (DL_FUNC) &_wCI_rCIBootC, 6},
     {"_wCI_newPCI", (DL_FUNC) &_wCI_newPCI, 8},
+    {"_wCI_KCI", (DL_FUNC) &_wCI_KCI, 6},
     {NULL, NULL, 0}
 };
 

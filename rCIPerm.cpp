@@ -28,7 +28,12 @@ extern "C" SEXP bootC(SEXP prcimat,
              SEXP pyties, 
              SEXP pseed);
 
-
+extern "C" SEXP kernalizedPairedConcIndex(SEXP pin_x,
+                                SEXP pin_y,
+                                SEXP pn,
+                                SEXP psymmetric,
+                                SEXP pkern1,
+                                SEXP pkern2);
 
 // [[Rcpp::export]]
 SEXP rCIPermC(SEXP pin_x, SEXP pin_y, SEXP pobsCI, SEXP pR, SEXP pB, SEXP pn, SEXP pxties, SEXP pyties, SEXP palternative,  SEXP pseed) {
@@ -72,4 +77,20 @@ SEXP newPCI(SEXP pin_x,
              pdeltaX,
              pdeltaY,
              plogic);
+}
+
+
+// [[Rcpp::export]]
+SEXP KCI(SEXP pin_x,
+             SEXP pin_y,
+             SEXP pn,
+             SEXP psymmetric,
+             SEXP pkern1,
+             SEXP pkern2) {
+    return kernalizedPairedConcIndex(pin_x,
+             pin_y,
+             pn,
+             psymmetric,
+             pkern1,
+             pkern2);
 }
