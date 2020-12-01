@@ -23,7 +23,7 @@ typedef struct retRes retRes;
 
 double bKernel(double diff, double kern1, double kern2){
 
-  return(1.0/(1.0+exp(kern2*(fabs(diff) - kern2))));
+  return(1.0/(1.0+exp(kern1*(fabs(diff) - kern2))));
 
 }
 
