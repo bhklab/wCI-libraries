@@ -597,10 +597,3 @@ SEXP rCI(SEXP pin_x,
   return out;
 
 }
-
-static const R_CallMethodDef callMethods[]  = {
-  {"rCI", (DL_FUNC) &rCI, 7},
-  {NULL, NULL, 0}
-};
-
-

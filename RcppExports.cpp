@@ -151,6 +151,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// frCI
+SEXP frCI(SEXP pin_x, SEXP pin_y, SEXP pdelta_x, SEXP pdelta_y, SEXP pn, SEXP pdiscard_x_ties, SEXP pdiscard_y_ties);
+RcppExport SEXP _wCI_frCI(SEXP pin_xSEXP, SEXP pin_ySEXP, SEXP pdelta_xSEXP, SEXP pdelta_ySEXP, SEXP pnSEXP, SEXP pdiscard_x_tiesSEXP, SEXP pdiscard_y_tiesSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type pin_x(pin_xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pin_y(pin_ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pdelta_x(pdelta_xSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pdelta_y(pdelta_ySEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pn(pnSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pdiscard_x_ties(pdiscard_x_tiesSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pdiscard_y_ties(pdiscard_y_tiesSEXP);
+    rcpp_result_gen = Rcpp::wrap(frCI(pin_x, pin_y, pdelta_x, pdelta_y, pn, pdiscard_x_ties, pdiscard_y_ties));
+    return rcpp_result_gen;
+END_RCPP
+}
 // KCI
 SEXP KCI(SEXP pin_x, SEXP pin_y, SEXP pn, SEXP psymmetric, SEXP pkern1, SEXP pkern2);
 RcppExport SEXP _wCI_KCI(SEXP pin_xSEXP, SEXP pin_ySEXP, SEXP pnSEXP, SEXP psymmetricSEXP, SEXP pkern1SEXP, SEXP pkern2SEXP) {
@@ -178,6 +195,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_wCI_rCIPermC", (DL_FUNC) &_wCI_rCIPermC, 10},
     {"_wCI_rCIBootC", (DL_FUNC) &_wCI_rCIBootC, 6},
     {"_wCI_newPCI", (DL_FUNC) &_wCI_newPCI, 8},
+    {"_wCI_frCI", (DL_FUNC) &_wCI_frCI, 7},
     {"_wCI_KCI", (DL_FUNC) &_wCI_KCI, 6},
     {NULL, NULL, 0}
 };
