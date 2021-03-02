@@ -97,6 +97,34 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// do_swaps_c
+extern "C" SEXP do_swaps_c(SEXP pvector, SEXP pvlen, SEXP pnswap, SEXP pseed);
+RcppExport SEXP _wCI_do_swaps_c(SEXP pvectorSEXP, SEXP pvlenSEXP, SEXP pnswapSEXP, SEXP pseedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type pvector(pvectorSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pvlen(pvlenSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pnswap(pnswapSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pseed(pseedSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_swaps_c(pvector, pvlen, pnswap, pseed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// do_random_swaps_c
+extern "C" SEXP do_random_swaps_c(SEXP pvector, SEXP pvlen, SEXP pnswap, SEXP pseed);
+RcppExport SEXP _wCI_do_random_swaps_c(SEXP pvectorSEXP, SEXP pvlenSEXP, SEXP pnswapSEXP, SEXP pseedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type pvector(pvectorSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pvlen(pvlenSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pnswap(pnswapSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type pseed(pseedSEXP);
+    rcpp_result_gen = Rcpp::wrap(do_random_swaps_c(pvector, pvlen, pnswap, pseed));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rCIPermC
 SEXP rCIPermC(SEXP pin_x, SEXP pin_y, SEXP pobsCI, SEXP pR, SEXP pB, SEXP pn, SEXP pxties, SEXP pyties, SEXP palternative, SEXP pseed);
 RcppExport SEXP _wCI_rCIPermC(SEXP pin_xSEXP, SEXP pin_ySEXP, SEXP pobsCISEXP, SEXP pRSEXP, SEXP pBSEXP, SEXP pnSEXP, SEXP pxtiesSEXP, SEXP pytiesSEXP, SEXP palternativeSEXP, SEXP pseedSEXP) {
@@ -192,6 +220,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_wCI_kernel_gaussian_C", (DL_FUNC) &_wCI_kernel_gaussian_C, 3},
     {"_wCI_kernel_laplace_C", (DL_FUNC) &_wCI_kernel_laplace_C, 3},
     {"_wCI_concordanceIndex_modified_helper_weighted", (DL_FUNC) &_wCI_concordanceIndex_modified_helper_weighted, 12},
+    {"_wCI_do_swaps_c", (DL_FUNC) &_wCI_do_swaps_c, 4},
+    {"_wCI_do_random_swaps_c", (DL_FUNC) &_wCI_do_random_swaps_c, 4},
     {"_wCI_rCIPermC", (DL_FUNC) &_wCI_rCIPermC, 10},
     {"_wCI_rCIBootC", (DL_FUNC) &_wCI_rCIBootC, 6},
     {"_wCI_newPCI", (DL_FUNC) &_wCI_newPCI, 8},

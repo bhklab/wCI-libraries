@@ -43,6 +43,17 @@ extern "C" SEXP rCI(SEXP pin_x,
                   SEXP pdiscard_x_ties, 
                   SEXP pdiscard_y_ties);
 
+// [[Rcpp::export]]
+extern "C" SEXP do_swaps_c(SEXP pvector,
+                  SEXP pvlen,
+                  SEXP pnswap,
+                  SEXP pseed);
+// [[Rcpp::export]]
+extern "C" SEXP do_random_swaps_c(SEXP pvector,
+                  SEXP pvlen,
+                  SEXP pnswap,
+                  SEXP pseed);
+
 
 // [[Rcpp::export]]
 SEXP rCIPermC(SEXP pin_x, SEXP pin_y, SEXP pobsCI, SEXP pR, SEXP pB, SEXP pn, SEXP pxties, SEXP pyties, SEXP palternative,  SEXP pseed) {
