@@ -31,7 +31,7 @@ struct Res{
 typedef struct Res Res;
 
 
-struct Items{
+struct Items{  
     double value; // value
     long int link_info; // link to the info array (this can be a polong inter as well)
     long int move; // the number of steps which is required to move.
@@ -43,7 +43,7 @@ struct Items{
 
 typedef struct Items Items;
 
-struct Items_info {
+struct Items_info { //this object contains all the information for each element of vector to keep the location of coressponding value and help to keep track of them
     double value; // value of the info which is main value
     long int link_main; // it can be a polong inter (link to the main value)
     long int link_axilary_left; // it can be a polong inter (link to the axilary value main-distance)
@@ -56,7 +56,7 @@ struct Items_info {
 typedef struct Items_info Items_info;
 
 
-void set_value_item(Items *x, double value_,long int link_info_,long int move_, int state_, long int type_ ){
+void set_value_item(Items *x, double value_,long int link_info_,long int move_, int state_, long int type_ ){ //setting item value 
         (*x).value = value_;
         (*x).link_info = link_info_; //it can be a polong inter
         (*x).move = move_;
@@ -67,14 +67,14 @@ void set_value_item(Items *x, double value_,long int link_info_,long int move_, 
 
     }
 
-void set_value_info(Items_info *x, double value_,long int link_main_,long int link_axilary_left_,long int link_axilary_right_){
+void set_value_info(Items_info *x, double value_,long int link_main_,long int link_axilary_left_,long int link_axilary_right_){ //seting item info values
         (*x).value = value_;
         (*x).link_main = link_main_;
         (*x).link_axilary_left = link_axilary_left_;
         (*x).link_axilary_right = link_axilary_right_;
     }
 
- void set_axilary_info(Items_info *x,long int link_axilary_lr_,long int link_axilary_rl_){
+ void set_axilary_info(Items_info *x,long int link_axilary_lr_,long int link_axilary_rl_){ // each item have axilary value and with this function
         (*x).link_axilary_lr = link_axilary_lr_;
         (*x).link_axilary_rl = link_axilary_rl_;
     }
@@ -169,6 +169,10 @@ void mergeSort(Items *arr, long int l, long int r)
 
 void Iterative_mergesort(Items *arr,long int n)
 {
+ /* arr: array which we want to sort
+    n: size of the array
+we use merge sort to sort arrays and 
+iterative merge sort is using to taking care of memory usage */
     long int size;
     long int l = 0;
     for (size=1; size<=n-1; size= 2*size)
@@ -277,7 +281,7 @@ void merge_CI(Items *arr, long int l, long int m, long int r)
 
 /* l is for left index && r is right index of the
  sub-array of arr to be sorted */
-void mergeSort_CI(Items *arr, long int l, long int r)
+void mergeSort_CI(Items *arr, long int l, long int r) 
 {
     if (l < r)
     {
@@ -295,6 +299,10 @@ void mergeSort_CI(Items *arr, long int l, long int r)
 
 void Iterative_mergesort_CI(Items *arr,long int n)
 {
+ /* arr: array which we want to sort
+    n: size of the array
+we use merge sort CI to sort arrays and also count number of moves for each element
+iterative merge sort CI is using to taking care of memory usage */
     long int size;
     long int l = 0;
     for (size=1; size<=n-1; size= 2*size)
@@ -334,7 +342,7 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
     Items_info *z_info = malloc(n * sizeof(Items_info));
 
     // printf("Allocated arrays\n");
-
+    /*------------------------------O(N)--------------------------------------*/
     for(long int i=0;i<n;i++){
         set_value_item(&x[3*i], arr_X[i]-dist_x,i,0,0,-1);
         set_value_item(&x[3*i+1], arr_X[i],i,0,1,0);
@@ -350,11 +358,12 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
 
     /* sort the first array*/
     //mergeSort(x,0,3*n-1);
-    Iterative_mergesort(x, 3*n);
+   /*------------------------------O(NlogN)--------------------------------------*/
+    Iterative_mergesort(x, 3*n); 
 
 
     // printf("mergesort done\n");
-
+    /*------------------------------O(N)--------------------------------------*/
     /* put the information in the info*/
     for(long int i=0;i<3*n;i++){
       // printf("\n%d\n", i);
@@ -374,8 +383,8 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
         
     }
     // printf("xinfo initialized\n");
-
-    /* based on the first array put the second array long into the write place */
+    /*------------------------------O(N)--------------------------------------*/
+    /* based on the first array put the second array long into the right place */
     for(long int i=0;i<n;i++){
         set_value_item(&y[2*x_info[i].link_axilary_left], arr_Y[i]+dist_y,i,0,0,2);
         set_value_item(&y[2*x_info[i].link_axilary_left+1], arr_Y[i]-dist_y,i,0,0,-1);
@@ -391,13 +400,14 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
     //     print_item(y[i]);
     // }
 
-
+    /*------------------------------O(NlogN)--------------------------------------*/
     /* sort the second array && find the steps which each item needs to move */
     //mergeSort_CI(y, 0,6*n-1);
     Iterative_mergesort_CI(y, 6*n);
     // printf("mergesort CI y\n");
 
-
+   /*------------------------------O(N)--------------------------------------*/ 
+   /*find the location of each  Y axilary and main item, this part help us to keep track of element and help to save time*/ 
     for(long int i=0;i<6*n;i++){
         if(y[i].state){
             y_info[y[i].link_info].link_main = i;
@@ -422,7 +432,7 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
             }
         }
     }
-
+    /*------------------------------O(N)-------------------------------------*/
     /*display(y, 6*n-1);*/
     // find the number of all steps which items moved
     long int steps = 0;
@@ -431,6 +441,7 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
             steps = y[i].move + steps;
         }
     
+    /*------------------------------O(NlogN)-----------------------------------*/   
     // to consider the items which come && placed inside  the long interval we consider z
     for(long int i=0;i<n;i++){
         set_value_item(&z[2*x_info[i].link_axilary_left], -1 * arr_Y[i]+dist_y,i,0,0,2);
@@ -442,10 +453,13 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
         
     }
 
+    /*------------------------------O(NlogN)----------------------------------*/
+    // to keep track of move frome right to left in we need to have z and keep track of different direction movement
     //mergeSort_CI(z, 0, 6*n-1);
     Iterative_mergesort_CI(z,6*n);
     
-    for(long int i=0;i<6*n;i++){
+    /*------------------------------O(N)--------------------------------------*/
+     for(long int i=0;i<6*n;i++){
         if(z[i].state){
             z_info[z[i].link_info].link_main = i;
         }else{
@@ -469,13 +483,15 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
             }
         }
     }
-    
+    /*------------------------------O(1)--------------------------------------*/
     long int *y_location = malloc((6*n)*sizeof(long int));
 
     if(y[0].state)
         y_location[0] = 1;
     else
         y_location[0] = 0;
+   /*------------------------------O(N)--------------------------------------*/
+   /* for finding location we only need to consider main item not axilary ones so we consider them in this part*/
     for(long int i=1;i<6*n;i++){
         if(!y[i].state)
             y_location[i] =y_location[i-1] ;
@@ -489,6 +505,9 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
         x_location[0] =0;
     else
         x_location[0]=1;
+ 
+   /*------------------------------O(N)--------------------------------------*/
+   /* for finding location we only need to consider main item not axilary ones so we consider them in this part*/
     for(long int i=1;i<3*n;i++){
         if(!x[i].state)
             x_location[i] =x_location[i-1] ;
@@ -500,7 +519,13 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
     long int move_plus;
     long int invalid_pairs = 0;
     long int incommon;
+    /*------------------------------O(N)--------------------------------------*/
     // to consider the valid pairs we need to remove the pairs which are in long intervals && add those who removed twice
+ 
+    /* in x vector and y vector we need not consider those items which are in between +/-delta_y and +/-delta_x.
+       we consider axilary to find these number and remove them from the valid pair,
+       while we consider some of them twice which we count in incommon in the following for loop at the end we find invalid pair by considering the location and incommon pairs */
+    
     for(long int i=0;i<n;i++){
         incommon = 0;
         if(y[y_info[i].link_axilary_left].move > 0){
@@ -517,11 +542,13 @@ Res rci(double *arr_X,double *arr_Y,double dist_x,double dist_y,long int n){
             move_plus = y[y_info[i].link_axilary_right].move;
             incommon = (move_mines - move_plus);
         }
+        //invalid pairs are those pairs (item_i , item_j) either y_i in [y_j +/- delta_y_j] or x_i in [x_j +/- delta_x_j] which we count here
         invalid_pairs = ( (y_location[y_info[i].link_axilary_right] - y_location[y_info[i].link_axilary_left] -1) + (x_location[x_info[i].link_axilary_right] - x_location[x_info[i].link_axilary_left] -1 ) - incommon) + invalid_pairs+1;
     }
-
+    //valid pairs are number of pairs in vectors which we need to consider
     double valid_pairs = ((double)n*(n-1))/2;
     valid_pairs = ((long)valid_pairs - ((double)invalid_pairs)/2);
+    // rci is evaluate based on the number of steps each element moved over number of the pairs which are considered in rci
     double rci = (valid_pairs-steps) / valid_pairs;
 
 
