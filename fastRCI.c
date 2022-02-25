@@ -198,7 +198,7 @@ SEXP rmerge_sort_c(SEXP pin_obs,
   memcpy(in_pairs, REAL(pin_pairs), N * sizeof(*in_pairs));
 
 
-  merge_sort(in_obs, in_preds, in_disc, in_pairs, N, 
+  rmerge_sort(in_obs, in_preds, in_disc, in_pairs, N, 
              out_obs, out_preds, out_disc, out_pairs, N,
              outx);
 
