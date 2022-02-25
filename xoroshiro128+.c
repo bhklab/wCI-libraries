@@ -7,6 +7,7 @@ worldwide. This software is distributed without any warranty.
 See <http://creativecommons.org/publicdomain/zero/1.0/>. */
 
 #include <stdint.h>
+#include <math.h>
 
 /* This is xoroshiro128+ 1.0, our best and fastest small-state generator
    for floating-point numbers. We suggest to use its upper bits for
