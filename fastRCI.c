@@ -145,13 +145,13 @@ void rmerge_sort(double *in_obs, double *in_preds, double *in_disc, double *in_p
     int right_length = in_length - split_idx;
     
 
-    merge_sort(oleft_obs, oleft_preds, oleft_disc, oleft_pairs, left_length, 
+    rmerge_sort(oleft_obs, oleft_preds, oleft_disc, oleft_pairs, left_length, 
                left_obs, left_preds, left_disc, left_pairs, left_length,
                outx);
-    merge_sort(oright_obs, oright_preds, oright_disc, oright_pairs, right_length, 
+    rmerge_sort(oright_obs, oright_preds, oright_disc, oright_pairs, right_length, 
                right_obs, right_preds, right_disc, right_pairs, right_length,
                outx);
-    merge_two_sides(left_obs, left_preds, left_disc, left_pairs, left_length,
+    rmerge_two_sides(left_obs, left_preds, left_disc, left_pairs, left_length,
                     right_obs, right_preds, right_disc, right_pairs, right_length,
                     out_obs, out_preds, out_disc, out_pairs, out_length,
                     outx);
